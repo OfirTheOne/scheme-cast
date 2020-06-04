@@ -31,7 +31,7 @@ export function cast<T>(schemeClass: Class<T>, rawValue: { [key: string]: any })
                 isFieldExists: globals.required_condition(rawValue[key]),
                 isFieldOptional: true,
                 defaultValueApplied: false,
-
+                isPreValidateTransform: false,
                 isAliasKeyApplied: false,
                 aliasKey: undefined //findFirstKeyWhereValueExists(key, )
             }
@@ -72,6 +72,7 @@ export function cast<T>(schemeClass: Class<T>, rawValue: { [key: string]: any })
                         break;
                     }
                 */
+
                     case FieldDefinitionType.REQUIRED: {
                         const requiredDefinitions = list;
 
@@ -97,27 +98,7 @@ export function cast<T>(schemeClass: Class<T>, rawValue: { [key: string]: any })
 
                         break;
                     }
-                    case FieldDefinitionType.VALIDATE: {
-                        // if field optional and not exists not applying validation definitions.
-                        if (loopVariables.isFieldOptionalAndNotExists || loopVariables.defaultValueApplied) { break; }
 
-                        const validateDefinitions = list;
-
-                        for (let def of validateDefinitions) {
-                            const { action, args, error } = def;
-
-                            const actionResult: boolean = (action as DefinitionAction<any>)({
-                                value: loopVariables.value,
-                                key,
-                                ref: rawValue
-                            }, ...args);
-                            if (!actionResult) {
-                                loopVariables.fieldErrors.push(((error || globals.errorGenerator)(def, { key, value: loopVariables.value })));
-                            }
-                        }
-
-                        break;
-                    }
                     case FieldDefinitionType.DEFAULT: {
                         // assign default values only on field that resolved to optional.
                         if (!loopVariables.isFieldOptional) { break }
@@ -140,6 +121,81 @@ export function cast<T>(schemeClass: Class<T>, rawValue: { [key: string]: any })
 
                         break;
                     }
+
+                    case FieldDefinitionType.TRANSFORM_PRE_VALIDATE: {
+                        if (globals.skip_transform_on_default && loopVariables.defaultValueApplied) { break }
+
+                        if (globals.skip_transform_on_optional_not_exists_no_default && 
+                           (
+                               loopVariables.isFieldOptional && 
+                                !loopVariables.isFieldExists && 
+                                !loopVariables.defaultValueApplied
+                            )
+                        ) { break }
+                        
+                        const transformPreValidateDefinitions = list;
+
+                        for (let def of transformPreValidateDefinitions) {
+                            const { action, args = [], error } = def;
+
+                            if (loopVariables.fieldErrors.length == 0) {
+                                const transformValue = (action as DefinitionAction<any>)({
+                                    value: loopVariables.value,
+                                    key,
+                                    ref: rawValue
+                                }, ...args);
+
+                                transformedValues[key] = transformValue;
+
+                                loopVariables.isPreValidateTransform = true;
+                                loopVariables.value = transformValue
+                            }
+                        }
+
+                        break;
+                    }
+
+                    case FieldDefinitionType.VALIDATE: {
+                        // if field optional and not exists not applying validation definitions.
+                        if (loopVariables.isFieldOptionalAndNotExists || loopVariables.defaultValueApplied) { break; }
+
+                        const validateDefinitions = list;
+
+                        for (let def of validateDefinitions) {
+                            const { action, args, error } = def;
+
+                            const actionResult: boolean = (action as DefinitionAction<any>)({
+                                value: loopVariables.value,
+                                key,
+                                ref: rawValue
+                            }, ...args);
+                            if (!actionResult) {
+                                loopVariables.fieldErrors.push(((error || globals.errorGenerator)(def, { key, value: loopVariables.value })));
+                            }
+                        }
+
+                        break;
+                    }
+
+                    case FieldDefinitionType.SCHEME_REF: {
+                        const defaultDefinitions = list;
+
+                        for (let def of defaultDefinitions) {
+                            const { action, args = [], error } = def;
+
+                            if (loopVariables.fieldErrors.length == 0) {
+                                const constructResult = processSchemeRefDefinition(def, loopVariables.value, key, loopVariables.fieldErrors, transformedValues);
+                                if (constructResult.errors.length > 0) {
+                                    loopVariables.fieldErrors.push(...constructResult.errors)
+                                } else {
+                                    transformedValues[key] = constructResult.value
+                                }
+                            }
+                        }
+
+                        break;
+                    }
+
                     case FieldDefinitionType.TRANSFORM: {
                         if (globals.skip_transform_on_default && loopVariables.defaultValueApplied) { break }
 
@@ -168,24 +224,7 @@ export function cast<T>(schemeClass: Class<T>, rawValue: { [key: string]: any })
 
                         break;
                     }
-                    case FieldDefinitionType.SCHEME_REF: {
-                        const defaultDefinitions = list;
 
-                        for (let def of defaultDefinitions) {
-                            const { action, args = [], error } = def;
-
-                            if (loopVariables.fieldErrors.length == 0) {
-                                const constructResult = processSchemeRefDefinition(def, loopVariables.value, key, loopVariables.fieldErrors, transformedValues);
-                                if (constructResult.errors.length > 0) {
-                                    loopVariables.fieldErrors.push(...constructResult.errors)
-                                } else {
-                                    transformedValues[key] = constructResult.value
-                                }
-                            }
-                        }
-
-                        break;
-                    }
                     default:
                         break;
                 }
@@ -231,8 +270,9 @@ function preprocessFieldDefinitions(definitions: Array<FieldDefinition>) {
         FieldDefinitionType.ALIAS,
         FieldDefinitionType.REQUIRED,
         FieldDefinitionType.DEFAULT,
-        FieldDefinitionType.SCHEME_REF,
+        FieldDefinitionType.TRANSFORM_PRE_VALIDATE,
         FieldDefinitionType.VALIDATE,
+        FieldDefinitionType.SCHEME_REF,
         FieldDefinitionType.TRANSFORM
     ].map(type => ([type, (groupedDefinitions[type] || [])] as [FieldDefinitionType, Array<FieldDefinition>]))
 

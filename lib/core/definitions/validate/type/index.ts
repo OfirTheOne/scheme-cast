@@ -10,7 +10,7 @@ import { FieldDefinitionType } from "../../../../models"
 export const StringType = definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
     id: 'Type:StringType',
-    action: ({key, value}) => typeof value == 'string'  
+    action: ({key, value}) => typeof value == 'string'
 })
 /**
  * @definition_type validate

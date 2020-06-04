@@ -11,6 +11,9 @@ export const globals = {
     skip_transform_on_default : true,
     skip_transform_on_optional_not_exists_no_default : true,
 
-    errorGenerator: (f, d) => ({ message: `Error - ${f.id} failed, on field : ${d.key}.`}),
+    errorGenerator: (f, d) => ({ 
+        message: `Error - ${f.id} failed, on field : ${d.key}.`,
+        id: f.id
+    }),
 
 }

@@ -3,4 +3,4 @@ import { FieldDefinitionType} from './../../models';
 
 
 
-export const PreValidateTransform = () => overrideDecoratorFactory(FieldDefinitionType.PRE_VALIDATE, FieldDefinitionType.TRANSFORM)
+export const PreValidateTransform = () => overrideDecoratorFactory(FieldDefinitionType.TRANSFORM_PRE_VALIDATE, FieldDefinitionType.TRANSFORM)

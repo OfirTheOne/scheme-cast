@@ -9,11 +9,10 @@ export enum FieldDefinitionType {
     ALIAS = 'alias',
     REQUIRED = 'required',
     DEFAULT = 'default',
-    PRE_VALIDATE = 'pre-validate',
+    TRANSFORM_PRE_VALIDATE = 'transform-pre-validate',
     VALIDATE = 'validate',
-    PRE_TRANSFORM = 'pre-transform',
-    TRANSFORM = 'transform',
     SCHEME_REF = 'scheme-ref',
+    TRANSFORM = 'transform',
 }
 
 
