@@ -6,6 +6,10 @@
   "directories": {
     "lib": "lib"
   },
+  "repository": {
+    "url": "https://github.com/OfirTheOne/scheme-cast",
+    "type": "GitHub"
+  },
   "types": "index.d.ts",
   "scripts": {
     "build-dev": "tsc -p tsconfig.json",
