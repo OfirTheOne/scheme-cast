@@ -1,0 +1,1 @@
+export const RootSchemeKey = Symbol("$$SCHEME_METADATA") 
