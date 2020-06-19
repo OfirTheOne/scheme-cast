@@ -1,15 +1,19 @@
 
 import { patterns } from '../../../../consts/regexp'
 import { definitionDecoratorFactory } from "../../../../internal/definition-decorator-factory";
+
 import { FieldDefinitionType } from "../../../../models";
 
+import { globals } from '../../../../globals';
+
+const idPrefix = 'Format';
 
 /**
  * @definition_type validate
  */
 export const IntegerFormat = definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Format:IntegerFormat',
+    id: globals.definition_id_generator(idPrefix, 'IntegerFormat'),
     action: ({key, value}) => typeof value == 'string' &&  Number.isInteger(value as any)
 })
 
@@ -18,7 +22,7 @@ export const IntegerFormat = definitionDecoratorFactory({
  */
 export const NumericFormat = definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Format:NumericFormat',
+    id: globals.definition_id_generator(idPrefix, 'NumericFormat'),
     action: ({key, value}) => typeof value == 'string' &&  !isNaN(value as any)
 })
 
@@ -27,7 +31,7 @@ export const NumericFormat = definitionDecoratorFactory({
  */
 export const PositiveIntegerFormat = definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Format:NumericFormat',
+    id: globals.definition_id_generator(idPrefix, 'PositiveIntegerFormat'),
     action: ({key, value}) => (typeof value == 'string' && patterns.positiveInteger.test(value as string))
 })
 
@@ -36,7 +40,7 @@ export const PositiveIntegerFormat = definitionDecoratorFactory({
  */
 export const NegativeIntegerFormat = definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Format:NumericFormat',
+    id: globals.definition_id_generator(idPrefix, 'NegativeIntegerFormat'),
     action: ({key, value}) => (typeof value == 'string' && patterns.negativeInteger.test(value as string) )
 })
 
@@ -45,7 +49,7 @@ export const NegativeIntegerFormat = definitionDecoratorFactory({
  */
 export const BooleanFormat = definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Format:BooleanFormat',
+    id: globals.definition_id_generator(idPrefix, 'BooleanFormat'),
     action: ({key, value}) => typeof value == 'string' &&  value == 'true' || value == 'false'
 })
 
@@ -54,6 +58,6 @@ export const BooleanFormat = definitionDecoratorFactory({
  */
 export const MatchRegexp = (regexp: RegExp) =>  definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Format:MatchRegexp',
+    id: globals.definition_id_generator(idPrefix, 'MatchRegexp'),
     action: ({key, value}) => (typeof value == 'string' && regexp.test(value as string))
 })

@@ -4,12 +4,16 @@ import { definitionDecoratorFactory } from "../../../../internal/definition-deco
 
 import { FieldDefinitionType } from "../../../../models"
 
+import { globals } from '../../../../globals';
+
+const idPrefix = 'Type';
+
 /**
  * @definition_type validate
  */
 export const StringType = definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Type:StringType',
+    id: globals.definition_id_generator(idPrefix, 'StringType'),
     action: ({key, value}) => typeof value == 'string'
 })
 /**
@@ -17,7 +21,7 @@ export const StringType = definitionDecoratorFactory({
  */
 export const NumberType = definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Type:NumberType',
+    id: globals.definition_id_generator(idPrefix, 'NumberType'),
     action: ({key, value}) => typeof value == 'number'  
 })
 /**
@@ -25,7 +29,7 @@ export const NumberType = definitionDecoratorFactory({
  */
 export const BooleanType = definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Type:BooleanType',
+    id: globals.definition_id_generator(idPrefix, 'BooleanType'),
     action: ({key, value}) => typeof value == 'boolean'  
 })
 /**
@@ -33,7 +37,7 @@ export const BooleanType = definitionDecoratorFactory({
  */
 export const ArrayType = definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Type:ArrayType',
+    id: globals.definition_id_generator(idPrefix, 'ArrayType'),
     action: ({key, value}) => Array.isArray(value)  
 })
 
@@ -45,6 +49,6 @@ export const ArrayType = definitionDecoratorFactory({
  */
 export const ObjectType = definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Type:ArrayType',
+    id: globals.definition_id_generator(idPrefix, 'ObjectType'),
     action: ({key, value}) => typeof value == 'object' && !Array.isArray(value) && value != null  
 })

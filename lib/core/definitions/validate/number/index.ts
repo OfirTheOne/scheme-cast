@@ -3,12 +3,16 @@ import { definitionDecoratorFactory } from "../../../../internal/definition-deco
 
 import { FieldDefinitionType } from "../../../../models"
 
+import { globals } from '../../../../globals';
+
+const idPrefix = 'Number';
+
 /**
  * @definition_type validate
  */
 export const Lt = (n: number) => definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Number:Lt',
+    id: globals.definition_id_generator(idPrefix, 'Lt'),
     action: ({key, value}) => typeof value == 'number' && value < n 
 })
 /**
@@ -16,7 +20,7 @@ export const Lt = (n: number) => definitionDecoratorFactory({
  */
 export const Lte = (n: number) => definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Number:Lte',
+    id: globals.definition_id_generator(idPrefix, 'Lte'),
     action: ({key, value}) => typeof value == 'number' && value <= n 
 })
 /**
@@ -24,7 +28,7 @@ export const Lte = (n: number) => definitionDecoratorFactory({
  */
 export const Gt = (n: number) => definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Number:Gt',
+    id: globals.definition_id_generator(idPrefix, 'Gt'),
     action: ({key, value}) => typeof value == 'number' && value > n
 })
 
@@ -33,7 +37,7 @@ export const Gt = (n: number) => definitionDecoratorFactory({
  */
 export const Gte = (n: number) => definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Number:Gte',
+    id: globals.definition_id_generator(idPrefix, 'Gte'),
     action: ({key, value}) => typeof value == 'number' &&  value >= n
 })
 
@@ -42,6 +46,6 @@ export const Gte = (n: number) => definitionDecoratorFactory({
  */
 export const InRange = (a: number, b: number) => definitionDecoratorFactory({
     type: FieldDefinitionType.VALIDATE,
-    id: 'Number:InRange',
+    id: globals.definition_id_generator(idPrefix, 'InRange'),
     action: ({key, value}) => typeof value == 'number' &&  a <= value  && value <= b 
 })
