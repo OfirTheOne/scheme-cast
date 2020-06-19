@@ -92,9 +92,109 @@ In the following example, only if all the 'validate' type definition will be res
 <br>
 <hr>
 <br>
+
+## API
+
+### scheme-cast / core / **cast**
+
+```ts
+function cast<T>(schemeClass: Class<T>, rawValue: { [key: string]: any }): ConstructResult<T>
+```
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
 <br>
 
-TODO: 
+### scheme-cast / definitions / **Required**
+
+```ts
+@Required<Class = any>(condition?: (ref: Class)=>boolean )
+```
+
+<u>Definition Type :</u> `required` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<br>
+
+
+
+### scheme-cast / definitions / **Optional**
+
+```ts
+@Optional<Class = any>(condition?: (ref: Class)=>boolean )
+```
+
+<u>Definition Type :</u> `required` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<br>
+
+
+### scheme-cast / definitions / **Default**
+
+```ts
+@Default(defaultValue: any)
+```
+
+<u>Definition Type :</u> `default` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<br>
+
+
+### scheme-cast / definitions / **GenerateDefault**
+
+```ts
+@GenerateDefault<ClassType>(defaultValueGenerate: DefinitionAction<ClassType>)
+```
+
+<u>Definition Type :</u> `default` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<br>
+
+
+
+<br>
+<hr>
+<br>
+
+
+## TODO: 
 * support pass options to definitions 
 * create a post transform validation options - √
 * create a Scheme class decorator for passing options
@@ -103,6 +203,11 @@ TODO:
 <br>
 <hr>
 <br>
+
+
+
+
+
 
 ## Example
 
