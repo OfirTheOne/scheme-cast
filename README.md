@@ -9,6 +9,14 @@ The goal is - putting some brain in the simple action of object to class casting
 
 The motivation developing this module is to abstract the validation & parsing process in to a more convenient process we'll call "cast", additionally by embedding the cast (validation & parsing) process in to the class definition we avoid redundancies.
 
+
+### This team inspire to deliver :
+- *simple as can be* code. 
+- 100% tested.
+- 100% documented.
+- extendable.
+
+
 ## An inside view of the core :  
 
 The decoration (referred as "Definition") used in a class are stored in a Definition-Map object, and by calling `cast` method with the class `C` and an object `O`, the map is extracted from the class `C`'s metadata and applied on object `O`.     
@@ -91,6 +99,7 @@ In the following example, only if all the 'validate' type definition will be res
 
 <br>
 <hr>
+<hr>
 <br>
 
 ## API
@@ -109,6 +118,7 @@ xxxxxxxx xxxx xxxx <br>
 xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
 xxxxxxxx xxxx xxxx <br>
 
+__________________________________________________
 <br>
 
 ### scheme-cast / definitions / **Required**
@@ -119,6 +129,8 @@ xxxxxxxx xxxx xxxx <br>
 
 <u>Definition Type :</u> `required` <br>
 
+* Generic form of this type.
+
 <u>Description :</u> <br>
 xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
 xxxxxxxx xxxx xxxx <br>
@@ -127,6 +139,7 @@ xxxxxxxx xxxx xxxx <br>
 xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
 xxxxxxxx xxxx xxxx <br>
 
+__________________________________________________
 <br>
 
 
@@ -134,7 +147,7 @@ xxxxxxxx xxxx xxxx <br>
 ### scheme-cast / definitions / **Optional**
 
 ```ts
-@Optional<Class = any>(condition?: (ref: Class)=>boolean )
+@Optional<ClassType=any>(condition?: (ref: ClassType)=>boolean )
 ```
 
 <u>Definition Type :</u> `required` <br>
@@ -147,6 +160,7 @@ xxxxxxxx xxxx xxxx <br>
 xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
 xxxxxxxx xxxx xxxx <br>
 
+__________________________________________________
 <br>
 
 
@@ -166,13 +180,14 @@ xxxxxxxx xxxx xxxx <br>
 xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
 xxxxxxxx xxxx xxxx <br>
 
+__________________________________________________
 <br>
 
 
 ### scheme-cast / definitions / **GenerateDefault**
 
 ```ts
-@GenerateDefault<ClassType>(defaultValueGenerate: DefinitionAction<ClassType>)
+@GenerateDefault<ClassType=any>(defaultValueGenerate: DefinitionAction<ClassType>)
 ```
 
 <u>Definition Type :</u> `default` <br>
@@ -185,11 +200,229 @@ xxxxxxxx xxxx xxxx <br>
 xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
 xxxxxxxx xxxx xxxx <br>
 
+__________________________________________________
+<br>
+
+### scheme-cast / definitions / **Validate**
+
+```ts
+@Validate<ClassType=any>(validate: DefinitionAction<boolean, ClassType>)
+```
+
+<u>Definition Type :</u> `validate` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+__________________________________________________
+<br>
+
+### scheme-cast / definitions / **Forbidden**
+
+```ts
+@Forbidden
+```
+
+<u>Definition Type :</u> `validate` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+__________________________________________________
+<br>
+
+### scheme-cast / definitions / **Exists**
+
+```ts
+@Exists
+```
+
+<u>Definition Type :</u> `validate` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+__________________________________________________
+<br>
+
+### scheme-cast / definitions / **Equals**
+
+```ts
+@Equals(val: any)
+```
+
+<u>Definition Type :</u> `validate` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+__________________________________________________
+<br>
+
+### scheme-cast / definitions / **EqualsToOneOf**
+
+```ts
+@EqualsToOneOf(valList: Array<any>)
+```
+
+<u>Definition Type :</u> `validate` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+__________________________________________________
+<br>
+
+### scheme-cast / definitions / **EqualsStrict**
+
+```ts
+@EqualsStrict(valList: Array<any>)
+```
+
+<u>Definition Type :</u> `validate` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+__________________________________________________
+<br>
+
+### scheme-cast / definitions / **EqualsStrictToOneOf**
+
+```ts
+@EqualsStrictToOneOf(valList: Array<any>)
+```
+
+<u>Definition Type :</u> `validate` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+__________________________________________________
+<br>
+
+### scheme-cast / definitions / **NotEquals**
+
+```ts
+@NotEquals(val: any)
+```
+
+<u>Definition Type :</u> `validate` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+__________________________________________________
+<br>
+
+### scheme-cast / definitions / **NotEqualsStrict**
+
+```ts
+@NotEqualsStrict(val: any)
+```
+
+<u>Definition Type :</u> `validate` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+__________________________________________________
+<br>
+
+### scheme-cast / definitions / **NotEqualsToEnyOf**
+
+```ts
+@NotEqualsToEnyOf(valList: Array<any>)
+```
+
+<u>Definition Type :</u> `validate` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+__________________________________________________
+<br>
+
+
+### scheme-cast / definitions / **NotEqualsStrictToEnyOf**
+
+```ts
+@NotEqualsStrictToEnyOf(valList: Array<any>)
+```
+
+<u>Definition Type :</u> `validate` <br>
+
+<u>Description :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+<u>Example :</u> <br>
+xxxxxxxx xxxx xxxx xxxxxxxx xxxx xxxx <br>
+xxxxxxxx xxxx xxxx <br>
+
+__________________________________________________
 <br>
 
 
 
+
+
+
+
+
+
 <br>
+<hr>
 <hr>
 <br>
 
@@ -199,8 +432,9 @@ xxxxxxxx xxxx xxxx <br>
 * create a post transform validation options - √
 * create a Scheme class decorator for passing options
 
+
 <br>
-<br>
+<hr>
 <hr>
 <br>
 
