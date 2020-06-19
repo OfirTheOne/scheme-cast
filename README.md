@@ -1,12 +1,5 @@
 
 
-TODO: 
-* support pass options to definitions 
-* create a post transform validation options - √
-* create a Scheme class decorator for passing options
-
-<br>
-<br>
 
 # Scheme Cast 
 
@@ -96,7 +89,17 @@ class User {
 In the following example, only if all the 'validate' type definition will be resolved the 'transform' type definition will be applied on the `pass` property.
 
 
+<br>
+<hr>
+<br>
+<br>
 
+TODO: 
+* support pass options to definitions 
+* create a post transform validation options - √
+* create a Scheme class decorator for passing options
+
+<br>
 <br>
 <hr>
 <br>
