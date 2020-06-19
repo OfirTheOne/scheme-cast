@@ -2,6 +2,8 @@
 
 
 export const globals = {
+
+
     required_condition: function(value: any) {
         return value != undefined && value != null;
     },
@@ -11,9 +13,14 @@ export const globals = {
     skip_transform_on_default : true,
     skip_transform_on_optional_not_exists_no_default : true,
 
-    errorGenerator: (f, d) => ({ 
+
+    error_generator: (f, d) => ({ 
         message: `Error - ${f.id} failed, on field : ${d.key}.`,
         id: f.id
     }),
 
+
+    definition_id_generator: (idPrefix: string, definitionName: string) => (
+        `${idPrefix}:${definitionName}`
+    )
 }
