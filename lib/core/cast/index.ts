@@ -7,12 +7,6 @@ import { ArrayOfSchemeRefAppliedOnNonArrayVelueError } from '../../errors';
 
 
 
-
-
-
-
-
-
 export function cast<T>(schemeClass: Class<T>, rawValue: { [key: string]: any }): ConstructResult<T> {
 
     const map: SchemeDefinitionMap = extractScheme(schemeClass);
@@ -90,7 +84,7 @@ export function cast<T>(schemeClass: Class<T>, rawValue: { [key: string]: any })
                             loopVariables.isFieldOptional = !actionResult;
 
                             if (!loopVariables.isFieldOptional && !loopVariables.isFieldExists) {
-                                loopVariables.fieldErrors.push(((error || globals.errorGenerator)(def, { key, value: loopVariables.value })));
+                                loopVariables.fieldErrors.push(((error || globals.error_generator)(def, { key, value: loopVariables.value })));
 
                             }
                             loopVariables.isFieldOptionalAndNotExists = (loopVariables.isFieldOptional && !loopVariables.isFieldExists);
@@ -170,7 +164,7 @@ export function cast<T>(schemeClass: Class<T>, rawValue: { [key: string]: any })
                                 ref: rawValue
                             }, ...args);
                             if (!actionResult) {
-                                loopVariables.fieldErrors.push(((error || globals.errorGenerator)(def, { key, value: loopVariables.value })));
+                                loopVariables.fieldErrors.push(((error || globals.error_generator)(def, { key, value: loopVariables.value })));
                             }
                         }
 
