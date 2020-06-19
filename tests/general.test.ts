@@ -142,8 +142,8 @@ describe('General usage of the core definitions', function() {
 })
 
 
-describe('ArrayOfSchemeRef usage.', function() {
 /*
+describe('ArrayOfSchemeRef usage.', function() {
     it('should validate the class scheme.', function() {
 
         class RequestQuery {
@@ -190,7 +190,7 @@ describe('ArrayOfSchemeRef usage.', function() {
         expect(result03.value.limit).to.be.eq('hello')
 
     }) 
-*/
+
     it('should validate a scheme array.', function() {
         class Product {
 
@@ -274,17 +274,17 @@ describe('ArrayOfSchemeRef usage.', function() {
         expect(result02.errors[0].items[1]["1"].length).to.be.eq(2)
 
     }) 
-    /*
+
 
     it('', function() {
         
     }) 
-    */
 })
+   */
 
 
 
-
+/*
 
 describe('Not applying transform type if optional & not exists.', function() {
 
@@ -319,6 +319,5 @@ describe('Not applying transform type if optional & not exists.', function() {
     it('', function() {
         
     }) 
-    */
 })
-
+   */
